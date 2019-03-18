@@ -31,7 +31,7 @@ try {
 	console.log(devServerConfigPath);
 	devServerConfigs = require(devServerConfigPath);
 } catch (e) {
-	console.error(e);
+	console.log('No dev config found. Using defaults.');
 	devServerConfigs = {};
 }
 
@@ -152,14 +152,15 @@ module.exports = devServerConfigs.map(function (devServerConfig) {
 		// use SPA
 		if (app && typeof  app === 'string') {
 			console.log('Serving ' +  app + ' as your single page app.');
+			var serverPath = devServerConfig.serverPath || '*';
 			if (isWebpack) {
-				devServer.get('*', function (req, res, next) {
+				devServer.get(serverPath, function (req, res, next) {
 					req.url =  app;
 					webpackDevServer(req, res, next);
 				});
 			}
 
-			devServer.get('*', function (req, res) {
+			devServer.get(serverPath, function (req, res) {
 				send(req,  app).pipe(res);
 			});
 		}

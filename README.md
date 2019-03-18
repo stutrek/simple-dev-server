@@ -16,6 +16,7 @@ module.exports = {
 	},
 	mockPath: 'mock',
 	app: '/index.html', // this can also be an express app
+	serverPath: '*', // this is the base path to your app
 	serverConfig: {}, // config for webpack-hot-server-middleware
 	port: 5450, // 3000 by default
 };
@@ -35,6 +36,7 @@ If you're rendering on the server it will use [webpack-hot-server-middleware](ht
 * `mockPath` - You can make a folder on your project that contains sample responses from your API calls. Paths that exist in this directory structure will be used instead of making HTTP calls.
 * `app` - An express app or a string that will be used to server your single page app.
 * `apps` - an array of apps, end with a string to serve a single page app. Ignored if `app` is present.
+* `serverPath` - a string to use as the base path of your app, for example `/myapp/*`. Default is `*`.
 * `serverConfig` - used for webpack-hot-server-middleware if there's a server entry in your webpack config.
 * `port` - the port number that will be used.
 
